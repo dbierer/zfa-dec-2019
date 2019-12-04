@@ -1,10 +1,6 @@
 # ZF Advanced -- Dec 2019
 
 ## TODO
-* Look for a code example using the EventFeature
-* Look up example of hydration chaining -- deep iteration (e.g. nested objects)
-* Check on status of ZF/Laminas
-  * Spoke with Maurice Kherlakian at Zend by Perforce: he confirmed ZF is moving to the Linux Foundation and will be called `Laminas`
 
 ## HOMEWORK
 * For Wed 4 Dec 2019
@@ -26,6 +22,19 @@
 /onlinemarket.work/module/Market/src/Form/PostForm.php
 /onlinemarket.work/module/Market/view/market/post/index.phtml
 ```
+
+## Q & A
+* Q: Do you have any examples of code using `EventFeature`?
+* A: In the VM look at the following classes: `Guestbook\Module` and `Guestbook\Mapper\GuestbookMapper`
+* Q: Do you have any examples of hydration chaining -- deep iteration (e.g. nested objects)
+* A: In the VM, in the `onlinemarket.complete` project, have a look at the following classes:
+  * Custom Hydrator: `Model\Hydrator\ListingsHydrator`
+  * Hydrator Chaining: see: https://github.com/dbierer/zf-master-aug-2019/blob/master/sandbox/public/events_aggregate_hydrator.php
+  * Examples of hydrator filters and strategies: see: https://github.com/dbierer/zf-master-aug-2019/tree/master/sandbox/public
+* Q: What is the status of ZF/Laminas?
+* A: Spoke with Maurice Kherlakian at Zend by Perforce: he confirmed ZF is moving to the Linux Foundation and will be called `Laminas`
+  * See: https://www.zend.com/blog/what-status-zend-framework-transition-laminas?utm_source=linkedin&utm_medium=social&utm_campaign=2019-zend-blog-what-status-zend-framework-transition-laminas&utm_content=blog
+
 
 ## ERRATA
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/2/8: `->join(['a' => static::TABLE],` s/be `->join(['a' => AttendeeTable::TABLE],`
