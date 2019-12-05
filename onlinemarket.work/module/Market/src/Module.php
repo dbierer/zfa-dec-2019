@@ -16,7 +16,7 @@ class Module
     //*** SHARED EVENT MANAGER LAB: add a listener to the "log" event which records the title of the item posted
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager = $e->getApplication()->getEventManager();       
+        $eventManager = $e->getApplication()->getEventManager();
         $eventManager->attach(MvcEvent::EVENT_DISPATCH, [$this, 'injectCategories']);
     }
     public function injectCategories(MvcEvent $e)
@@ -49,14 +49,6 @@ class Module
     //*** INITIALZERS LAB: define an initializer which will inject a ListingsTable instance into controllers
     public function getControllerConfig()
     {
-        return [
-			'initializers' => [
-				'market-set-listings-table' => function ($container, $instance) {
-					if ($instance instanceof Controller\ListingsTableAwareInterface) {
-						$instance->setListingsTable($container->get('model-listings-table'));
-					}
-				},
-			],
-        ];
+        return [];
     }
 }
