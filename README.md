@@ -12,6 +12,7 @@
 * For Mon 9 Dec 2019
   * [OPTIONAL] Lab: File Uploads
   * [OPTIONAL] Lab: Form Security
+  * Lab: Initializers
   * Copy the entire module structure from `onlinemarket.work` in this repo to your VM `onlinemarket.work` project folder:
 ```
 /onlinemarket.work/module/Cache/*
