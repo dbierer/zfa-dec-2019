@@ -9,6 +9,9 @@
 * A: Examples???
 
 ## HOMEWORK
+* For Wed 11 Dec 2019
+  * NOTE: need to create `/data/auth` directory for Authentication/ACL labs to work
+    * Also: set write permissions to `www-data` user
 * For Mon 9 Dec 2019
   * [OPTIONAL] Lab: File Uploads
   * [OPTIONAL] Lab: Form Security
