@@ -10,17 +10,24 @@
 
 ## HOMEWORK
 * For Wed 11 Dec 2019
+  * Lab: Logging
+    * Activate and complete the `Logging` module
+  * Lab: Zend Mail
+    * Add the email notification to `Market\Controller\PostController` when an onlinemarket posting is made
   * NOTE: need to create `/data/auth` directory for Authentication/ACL labs to work
     * Also: set write permissions to `www-data` user
+  * Copy the following files from `onlinemarket.work` in this repo to your VM `onlinemarket.work` project folder:
+```
+onlinemarket.work/module/Login/*
+onlinemarket.work/module/AccessControl/*
+# copy layout.phtml to ~/Zend/workspaces/DefaultWorkspace/onlinemarket.work/module/Application/view/layout
+```
 * For Mon 9 Dec 2019
   * [OPTIONAL] Lab: File Uploads
   * [OPTIONAL] Lab: Form Security
   * Lab: Initializers
-  * Copy the entire module structure from `onlinemarket.work` in this repo to your VM `onlinemarket.work` project folder:
+  * Copy the following 2 files from `onlinemarket.work` in this repo to your VM `onlinemarket.work` project folder:
 ```
-/onlinemarket.work/module/Cache/*
-/onlinemarket.work/module/SecurePost/*
-// also copy these 2 files:
 onlinemarket.work/module/Market/src/Module.php
 onlinemarket.work/module/Market/src/Controller/Factory/ViewControllerFactory.php
 ```
