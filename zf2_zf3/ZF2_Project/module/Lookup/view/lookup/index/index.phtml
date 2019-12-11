@@ -1,0 +1,11 @@
+<h1>Lookup</h1>
+<hr>
+<?php if (!empty($this->list)) : ?>
+    <pre>
+    <?php foreach ($this->list as $item) : ?>
+    <?php   printf("%12s : %20s : %20s : %2s : %12s\n", $item->first_name, $item->last_name, substr($item->city,0,20), $item->country, $item->postalCode); ?>
+    <?php endforeach; ?>
+    </pre>
+<?php else : ?>
+No items on the list
+<?php endif; ?>
