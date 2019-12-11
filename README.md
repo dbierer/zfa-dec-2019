@@ -1,6 +1,8 @@
 # ZF Advanced -- Dec 2019
 
 ## TODO
+* Make sure Guestbook app is working.  if not, get it working and post to this repo
+* Q: Why was Zend\Debug abandoned???
 * Q: When using listener aggregates which are invoked via the service manager, are instances created immediately?
      If this is the case, is there a solution in situations where there are massive dependencies?
 * A: [`Zend\Mvc\Application::init()`](https://github.com/zendframework/zend-mvc/blob/master/src/Application.php) consolidates all listeners listed the under the `listeners` key.  `init()` then calls `bootstrap()` providing the list of listeners as an argument. This means that any listener aggregate defined by service manager factory will have an instance created.  The actual listener method, however, is *not* called until the event is triggered.  So, if the "heavy" logic is in the listener aggregate `__construct()` method, performance is affected negatively.  However, if the "heavy" logic is in the listener method itself, performance is not affected until the event associated with the listener is triggered.
@@ -17,6 +19,13 @@
 * A: Examples???
 
 ## HOMEWORK
+* For Fri 13 Dec 2019
+  * Lab: Cache
+  * Lab: Sessions
+  * Lab: Logging
+    * Activate and complete the `Logging` module
+    * Might need to extend the class and override `registerErrorHandler()` to account for PHP 7 error handling
+    * To test: create a controller action that divides a number by zero, which should throw a `DivisionByZeroError`.
 * For Wed 11 Dec 2019
   * Lab: Abstract Factories
   * Lab: Delegators
@@ -29,8 +38,6 @@ onlinemarket.work/module/AccessControl/*
 # copy layout.phtml to ~/Zend/workspaces/DefaultWorkspace/onlinemarket.work/module/Application/view/layout
 ```
 * Not Yet Assigned:
-  * Lab: Logging
-    * Activate and complete the `Logging` module
   * Lab: Zend Mail
     * Add the email notification to `Market\Controller\PostController` when an onlinemarket posting is made
 * For Mon 9 Dec 2019
@@ -84,3 +91,4 @@ onlinemarket.work/module/Market/src/Controller/Factory/ViewControllerFactory.php
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/3/19: if `name` param is not specified for the FieldSet, how is it referenced?
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/4/32: does this syntax work?  maybe need a namespace classname as a key, not just `param1` etc.
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/5/21: `listeners` key needs to be at the top level (e.g. parallel to `service_manager`) in the `module.config.php` file
+* file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/5/71: descriptions of log destinations are reversed
