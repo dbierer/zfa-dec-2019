@@ -2,6 +2,10 @@
 
 ## TODO
 * Make sure Guestbook app is working.  if not, get it working and post to this repo
+* Q: Can you use predefined `Zend\Mvc\Service\*` services to use the ServiceManager to retrieve a working, fully configured view renderer?
+     REF: the Zend\Mail use case in the Cross Cutting Concerns course module.
+* Q: Example of adding an inline image using Zend\Mime?
+
 * Q: Why was Zend\Debug abandoned???
 * Q: When using listener aggregates which are invoked via the service manager, are instances created immediately?
      If this is the case, is there a solution in situations where there are massive dependencies?
@@ -16,6 +20,11 @@
 * Q: Sometimes `Zend\Form\Element\Csrf` rejects form submissions for no apparent reason.  Any ideas on this?
 
 ## HOMEWORK
+* For Mon 16 Dec 2019
+  * Lab: Zend Mail
+    * Add the email notification to `Market\Controller\PostController` when an onlinemarket posting is made
+  * Lab: Authentication
+  * Lab: Password Storage
 * For Fri 13 Dec 2019
   * Lab: Cache
   * Lab: Sessions
@@ -34,9 +43,6 @@ onlinemarket.work/module/Login/*
 onlinemarket.work/module/AccessControl/*
 # copy layout.phtml to ~/Zend/workspaces/DefaultWorkspace/onlinemarket.work/module/Application/view/layout
 ```
-* Not Yet Assigned:
-  * Lab: Zend Mail
-    * Add the email notification to `Market\Controller\PostController` when an onlinemarket posting is made
 * For Mon 9 Dec 2019
   * [OPTIONAL] Lab: File Uploads
   * [OPTIONAL] Lab: Form Security
@@ -93,3 +99,7 @@ onlinemarket.work/module/Market/src/Controller/Factory/ViewControllerFactory.php
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/4/32: does this syntax work?  maybe need a namespace classname as a key, not just `param1` etc.
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/5/21: `listeners` key needs to be at the top level (e.g. parallel to `service_manager`) in the `module.config.php` file
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/5/71: descriptions of log destinations are reversed
+* file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/6/6: `setCredential()` needs a plain text password as argument, not a hash!
+* file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/6/7: `setCredential()` needs a plain text password as argument, not a hash!
+* file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/6/12: s/use the pre-defined constants (see: https://github.com/zendframework/zend-ldap/blob/master/src/Ldap.php)
+
