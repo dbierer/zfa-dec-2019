@@ -368,16 +368,6 @@ CREATE TABLE `session_storage` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `session_storage`
---
-
-LOCK TABLES `session_storage` WRITE;
-/*!40000 ALTER TABLE `session_storage` DISABLE KEYS */;
-INSERT INTO `session_storage` VALUES (88,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}'),(89,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}'),(90,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}'),(91,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}'),(92,'bs66niur7ner40g1aj1gpplmbu','Zend_Auth','C:23:\"Zend\\Stdlib\\ArrayObject\":862:{a:4:{s:7:\"storage\";a:1:{s:7:\"storage\";O:16:\"Login\\Model\\User\":2:{s:10:\"\0*\0mapping\";a:7:{s:2:\"id\";s:2:\"id\";s:5:\"email\";s:5:\"email\";s:8:\"username\";s:8:\"username\";s:8:\"password\";s:8:\"password\";s:16:\"securityquestion\";s:17:\"security_question\";s:14:\"securityanswer\";s:15:\"security_answer\";s:6:\"locale\";s:6:\"locale\";}s:13:\"\0*\0properties\";a:9:{s:2:\"id\";s:1:\"6\";s:5:\"email\";s:14:\"admin@zend.com\";s:8:\"username\";s:5:\"admin\";s:8:\"password\";s:60:\"$2y$10$SZx5lX6/hJFb//lvocLkeessDzlL7hmr63BBmcVFC22iT/1SCZz6C\";s:16:\"securityquestion\";s:43:\"What language is Zend Framework written in?\";s:14:\"securityanswer\";s:3:\"PHP\";s:4:\"role\";s:5:\"admin\";s:8:\"provider\";s:7:\"default\";s:6:\"locale\";s:2:\"en\";}}}s:4:\"flag\";i:2;s:13:\"iteratorClass\";s:13:\"ArrayIterator\";s:19:\"protectedProperties\";a:4:{i:0;s:7:\"storage\";i:1;s:4:\"flag\";i:2;s:13:\"iteratorClass\";i:3;s:19:\"protectedProperties\";}}}'),(93,'bs66niur7ner40g1aj1gpplmbu','Application','C:23:\"Zend\\Stdlib\\ArrayObject\":275:{a:4:{s:7:\"storage\";a:1:{s:7:\"message\";s:48:\"<b style=\"color:green;\">Login was successful</b>\";}s:4:\"flag\";i:2;s:13:\"iteratorClass\";s:13:\"ArrayIterator\";s:19:\"protectedProperties\";a:4:{i:0;s:7:\"storage\";i:1;s:4:\"flag\";i:2;s:13:\"iteratorClass\";i:3;s:19:\"protectedProperties\";}}}'),(94,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}'),(95,'bs66niur7ner40g1aj1gpplmbu','__ZF','a:1:{s:6:\"_VALID\";a:1:{s:25:\"Zend\\Session\\Validator\\Id\";s:26:\"bs66niur7ner40g1aj1gpplmbu\";}}');
-/*!40000 ALTER TABLE `session_storage` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `users`
 --
 
