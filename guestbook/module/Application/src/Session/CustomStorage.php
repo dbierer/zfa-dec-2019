@@ -3,7 +3,8 @@ namespace Application\Session;
 
 use Zend\StdLib\ArrayObject;
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Metadata\Metadata;
+use Zend\Db\TableGateway\ {TableGateway, Feature\EventFeature, Feature\MetadataFeature};
 use Zend\Session\Storage\StorageInterface;
 
 class CustomStorage extends ArrayObject implements StorageInterface
@@ -19,15 +20,12 @@ class CustomStorage extends ArrayObject implements StorageInterface
         $this->sessId = session_id();
         $this->setRequestAccessTime(microtime(true));
         $this->adapter = $adapter;
-        $result = $this->adapter->query('SELECT * FROM ' . self::TABLE_NAME . ' WHERE sess_id = ?', [$this->sessId]);
-        if ($result) {
-            foreach ($result as $obj) {
-                if ($obj->count()) {
-                    foreach ($obj->getArrayCopy() as $key => $value) {
-                        $this->offsetSet($key, unserialize($value));
-                    }
-                }
-            }
+        $metaFeature = new MetadataFeature(new Metadata($adapter));
+        $this->table = new TableGateway(self::TABLE_NAME, $adapter, $metaFeature);
+        $result = $this->table->select(['sess_id' =>$this->sessId]);
+        $data = $result->current()['value'] ?? NULL;
+        if ($data && is_string($data)) {
+            $this->fromArray(unserialize($data));
         }
     }
     /**
@@ -39,16 +37,15 @@ class CustomStorage extends ArrayObject implements StorageInterface
      */
     public function __destruct()
     {
-        // remove entries for this sess id
-        $this->adapter->query('DELETE FROM ' . self::TABLE_NAME . ' WHERE sess_id = ?', [$this->sessId]);
-        // get current sessId
-        $this->sessId = session_id();
-        if ($this->storage && count($this->storage)) {
-            $stmt = $this->adapter->query('INSERT INTO ' . self::TABLE_NAME . ' (`sess_id`,`key`,`value`) VALUES (?,?,?)', Adapter::QUERY_MODE_PREPARE);
-            foreach ($this->storage as $key => $value) {
-                $stmt->execute([$this->sessId, $key, serialize($value)]);
-            }
+        // remove entries for old sess id
+        $oldSessId = $this->sessId;
+        $newSessId = session_id();
+        $this->table->delete(['sess_id' => $oldSessId]);
+        if ($oldSessId != $newSessId) {
+            $this->table->delete(['sess_id' => $newSessId]);
+            $this->sessId = $newSessId;
         }
+        $this->table->insert(['sess_id' => $this->sessId, 'key' => date('Y-m-d H:i:s'), 'value' => serialize($this->toArray())]);
     }
 
     public function getRequestAccessTime()

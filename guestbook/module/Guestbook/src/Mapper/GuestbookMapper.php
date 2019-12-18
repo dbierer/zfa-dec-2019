@@ -4,7 +4,8 @@ namespace Guestbook\Mapper;
 use Guestbook\Model\Guestbook as GuestbookModel;
 use Zend\Db\Sql\ {Sql,Expression};
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\TableGateway\ {TableGateway, Feature\EventFeature};
+use Zend\Db\Metadata\Metadata;
+use Zend\Db\TableGateway\ {TableGateway, Feature\EventFeature, Feature\MetadataFeature};
 use Zend\Db\ResultSet\HydratingResultSet;
 use Zend\Hydrator\ObjectPropertyHydrator;
 use Zend\EventManager\EventManager;
@@ -25,9 +26,12 @@ class GuestbookMapper
         $this->adapter = $adapter;
         $this->eventManager = new EventManager();
         $this->eventManager->addIdentifiers([self::IDENTIFIER]);
-        $feature = new EventFeature($this->eventManager);
+        // set up features
+        $metaFeature = new MetadataFeature(new Metadata($adapter));
+        $eventFeature = new EventFeature($this->eventManager);
+        // set up tablegateway with hydrating result set + features
         $resultSet = new HydratingResultSet(new ObjectPropertyHydrator(), new GuestbookModel);
-        $this->table = new TableGateway(self::TABLE_NAME, $adapter, $feature, $resultSet);
+        $this->table = new TableGateway(self::TABLE_NAME, $adapter, [$eventFeature, $metaFeature], $resultSet);
     }
     public function findAll()
     {

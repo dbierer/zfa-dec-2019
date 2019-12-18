@@ -7,7 +7,7 @@ use Application\Session\ {CustomStorage, CustomManager};
 
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\LazyListener;
-use Zend\Session\Container;
+use Zend\Session\ {SessionManager,Container,Storage\SessionStorage};
 use Zend\Db\Adapter\Adapter;
 
 class Module
@@ -39,7 +39,7 @@ class Module
     {
         $manager = $e->getApplication()->getServiceManager()->get('application-session-manager');
         Container::setDefaultManager($manager);
-        $manager->start();
+        //$manager->start();
     }
 
     public function getServiceConfig()
@@ -53,10 +53,11 @@ class Module
                     return new Container(__NAMESPACE__);
                 },
                 'application-session-storage' => function ($container) {
-                    return new CustomStorage($container->get('application-db-adapter'));
+                    return new SessionStorage();
+                    //return new CustomStorage($container->get('application-db-adapter'));
                 },
                 'application-session-manager' => function ($container) {
-                    $manager = new CustomManager();
+                    $manager = new SessionManager();
                     $manager->setStorage($container->get('application-session-storage'));
                     return $manager;
                 },

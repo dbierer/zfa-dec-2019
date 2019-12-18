@@ -62,9 +62,9 @@ return [
             ],
         ],
         'factories' => [
-            GuestbookForm::class => GuestbookFormFactory::class,
+            GuestbookForm::class   => GuestbookFormFactory::class,
             GuestbookMapper::class => GuestbookMapperFactory::class,
-            CacheAggregate::class =>CacheAggregateFactory::class,
+            CacheAggregate::class  => CacheAggregateFactory::class,
         ],
     ],
     'controllers' => [

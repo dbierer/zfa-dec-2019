@@ -9,3 +9,4 @@ CREATE TABLE `session_storage` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+CREATE UNIQUE INDEX `sess_id` ON `session_storage` (`sess_id`);
