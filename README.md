@@ -71,6 +71,12 @@ onlinemarket.work/module/Market/src/Controller/Factory/ViewControllerFactory.php
 ```
 
 ## Q & A
+* Q: Do you have an example using `Zend\Stratigility`?
+* A: See: https://github.com/dbierer/strat_post
+
+* Q: Where is a good place to start reading on Middleware?
+* A: See: https://docs.zendframework.com/zend-stratigility/middleware/
+
 * Q: Do you have any examples of code using `EventFeature`?
 * A: In the VM look at the following classes: `Guestbook\Module` and `Guestbook\Mapper\GuestbookMapper`
 
