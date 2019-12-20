@@ -1,5 +1,6 @@
 <?php
 namespace Login\Controller;
+
 use Application\Traits\SessionTrait;
 use Guestbook\Listener\CacheAggregate;
 use Login\Model\ {User, UsersTable};
@@ -20,17 +21,17 @@ class IndexController extends AbstractActionController
     protected $table, $loginForm, $regForm, $authService, $authAdapter;
     public function indexAction()
     {
-        return new ViewModel(['loginForm' => $this->loginForm, 
+        return new ViewModel(['loginForm' => $this->loginForm,
                               'regForm' => $this->regForm,
                               'message' => '']);
-    }    
+    }
     /**
      * Performs basic login / authentication
-     * 
+     *
      * Additional security suggestions:
      * #1: create a log file of successful and failed login attempts
      * #2: maintain a counter and redirect at random if XXX number of failed login attempts
-     * 
+     *
      */
     public function loginAction()
     {
@@ -51,13 +52,15 @@ class IndexController extends AbstractActionController
                 $result = $this->authAdapter->authenticate();
                 if ($result->isValid()) {
                     $storage = $this->authService->getStorage();
-                    $user = new User(get_object_vars($this->authAdapter->getResultRowObject()));
+                    $colsToOmit = ['password','security_question','security_answer'];
+                    $user = new User(get_object_vars($this->authAdapter->getResultRowObject(NULL, $colsToOmit)));
                     // override locale
                     $user->setLocale($locale);
                     $storage->write($user);
+                    error_log(__METHOD__ . ':' . var_export($user, TRUE));
                     $this->sessionContainer->message = self::LOGIN_SUCCESS;
                     $this->getEventManager()->trigger(CacheAggregate::EVENT_CLEAR_CACHE, $this);
-                    return $this->redirect()->toRoute('home');
+                    $message = self::LOGIN_SUCCESS;
                 } else {
                     $message = self::LOGIN_FAIL . '<br>' . implode('<br>', $result->getMessages());
                 }
@@ -65,7 +68,7 @@ class IndexController extends AbstractActionController
             $this->sessionContainer->message = $message;
         }
         $message = $message ?? $this->sessionContainer->message ?? '';
-        $viewModel = new ViewModel(['loginForm' => $this->loginForm, 
+        $viewModel = new ViewModel(['loginForm' => $this->loginForm,
                                     'regForm' => $this->regForm,
                                     'message' => $message]);
         $viewModel->setTemplate('login/index/index');
@@ -77,7 +80,7 @@ class IndexController extends AbstractActionController
         $this->sessionManager->destroy();
 		$this->getEventManager()->trigger(CacheAggregate::EVENT_CLEAR_CACHE, $this);
         return $this->redirect()->toRoute('login');
-    }    
+    }
     public function registerAction()
     {
         $message = '';
@@ -96,7 +99,7 @@ class IndexController extends AbstractActionController
                 }
             }
         }
-        $viewModel = new ViewModel(['loginForm' => $this->loginForm, 
+        $viewModel = new ViewModel(['loginForm' => $this->loginForm,
                                     'regForm' => $this->regForm,
                                     'message' => $message]);
         $viewModel->setTemplate('login/index/index');
@@ -114,12 +117,12 @@ class IndexController extends AbstractActionController
     {
         $this->loginForm = $form;
         return $this;
-    }    
+    }
     public function setRegForm(RegForm $form)
     {
         $this->regForm = $form;
         return $this;
-    }    
+    }
     public function setAuthService(AuthenticationService $svc)
     {
         $this->authService = $svc;

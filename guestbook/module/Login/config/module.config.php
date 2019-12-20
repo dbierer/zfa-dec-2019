@@ -36,7 +36,7 @@ return [
         ],
         // override in /config/autoload/login.local.php
         'services' => [
-            'login-storage-filename' => __DIR__ . '/../../../data/auth/storage.txt',
+            'login-storage-dir' => __DIR__ . '/../../../data/auth',
             'login-block-cipher-config' => [
                 'openssl', ['algo' => 'aes', 'mode' => 'gcm']
             ],
@@ -66,7 +66,7 @@ return [
                 'menu-login-logout' => ['deny' => NULL],
             ],
             'user' => [
-                'login'             => ['allow' => 'logout'],
+                'login'             => ['allow' => ['login','logout']],
                 'menu-login-login'  => ['deny' => NULL],
                 'menu-login-logout' => ['allow' => NULL],
             ],

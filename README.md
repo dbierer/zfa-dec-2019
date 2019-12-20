@@ -10,35 +10,6 @@ mysql -uvagrant -pvagrant zfcourse ./guestbook/update.sql
 ```
   * *** WORK IN PROGRESS ***
 
-* Q: How does the breadcrumbs navigation know what page is active?
-* A: When a link is clicked, the navigation instance marks that "page" as active.  The breadcrumbs rendered then walks back from that page within the navigation tree, producing breadcrumb links along the way.
-* A: See: `Zend\View\Helper\Navigation\Breadcrumbs::renderStraight()`
-
-* Q: How would you implement database *row* level security?  Using ACL?
-* A: Follow these steps:
-  * Create a service manager service which defines a set of `Zend\Db\Sql\Where` conditions which define what data a given role is allowed to access
-  * Add commands wherever sensitive data is accessed to trigger
-  * Attach one or more listeners to a custom defined `DB_PRE_INSERT`, `DB_PRE_UPDATE`, `DB_PRE_DELETE` and `DB_PRE_SELECT` events
-  * The listeners should look for a `zend_db_sql` parameter in the `Event` class passed automatically to the listener
-  * The `zend_db_sql` parameter should be a `Zend\Db\Sql\Sql` instance
-  * The listener would then add the appropriate `Zend\Db\Sql\Where` condition to the `Zend\Db\Sql\Sql` instance
-  * The class which triggers any of these events needs to do 2 things:
-    * Create a generic `Zend\Db\Sql\Sql` instance representing the operation to take place
-    * Trigger one of the custom defined `DB_PRE_INSERT`, `DB_PRE_UPDATE`, `DB_PRE_DELETE` and `DB_PRE_SELECT` events
-    * In the trigger, add a parameter `zend_db_sql` representing the `Zend\Db\Sql\Sql` instance
-    * Make sure to use the SQL generated from the `Zend\Db\Sql\Sql` instance in the code which follows the trigger
-
-* Q: Reference to article on how to implement ACLs for a group
-* A: Read about the "MR_X" technique: https://www.zend.com/blog/zend-framework-acls-users-multiple-roles
-
-* Q: `SecurePost` module: where is the code which swaps out the view?
-* A: You can manipulate the `template_map` param to swap the view.  Example: in
-
-* Q: Can we use delegators to run ZF2 code from ZF3?  Examples?
-* A: This will not work in most cases as the class definitions from ZF2 will conflict with those of ZF3.  Even if you manipulate the SPL autoload stack, you will run into problems of duplicate namespaces between ZF2 and ZF2
-* A: One solution is to do a global search and replace in the ZF2 app and replace all references `Zend\` to `Zend2\`
-* A: Another solution is to add an `API` module to the ZF2 app, and then have the ZF3 app make API calls to ZF2.  See: https://github.com/dbierer/ZF2_Api_ZF3
-
 ## HOMEWORK
 * For Wed 18 Dec 2019
   * Lab: ACL
@@ -142,7 +113,35 @@ $this->add($name);
 ```
 Zend\Navigation\View\ViewHelperManagerDelegatorFactory
 Zend\Navigation\View\HelperConfig
+```
+* Q: How does the breadcrumbs navigation know what page is active?
+* A: When a link is clicked, the navigation instance marks that "page" as active.  The breadcrumbs rendered then walks back from that page within the navigation tree, producing breadcrumb links along the way.
+* A: See: `Zend\View\Helper\Navigation\Breadcrumbs::renderStraight()`
 
+* Q: How would you implement database *row* level security?  Using ACL?
+* A: Follow these steps:
+  * Create a service manager service which defines a set of `Zend\Db\Sql\Where` conditions which define what data a given role is allowed to access
+  * Add commands wherever sensitive data is accessed to trigger
+  * Attach one or more listeners to a custom defined `DB_PRE_INSERT`, `DB_PRE_UPDATE`, `DB_PRE_DELETE` and `DB_PRE_SELECT` events
+  * The listeners should look for a `zend_db_sql` parameter in the `Event` class passed automatically to the listener
+  * The `zend_db_sql` parameter should be a `Zend\Db\Sql\Sql` instance
+  * The listener would then add the appropriate `Zend\Db\Sql\Where` condition to the `Zend\Db\Sql\Sql` instance
+  * The class which triggers any of these events needs to do 2 things:
+    * Create a generic `Zend\Db\Sql\Sql` instance representing the operation to take place
+    * Trigger one of the custom defined `DB_PRE_INSERT`, `DB_PRE_UPDATE`, `DB_PRE_DELETE` and `DB_PRE_SELECT` events
+    * In the trigger, add a parameter `zend_db_sql` representing the `Zend\Db\Sql\Sql` instance
+    * Make sure to use the SQL generated from the `Zend\Db\Sql\Sql` instance in the code which follows the trigger
+
+* Q: Reference to article on how to implement ACLs for a group
+* A: Read about the "MR_X" technique: https://www.zend.com/blog/zend-framework-acls-users-multiple-roles
+
+* Q: `SecurePost` module: where is the code which swaps out the view?
+* A: You can manipulate the `template_map` param to swap the view.  Example: in
+
+* Q: Can we use delegators to run ZF2 code from ZF3?  Examples?
+* A: This will not work in most cases as the class definitions from ZF2 will conflict with those of ZF3.  Even if you manipulate the SPL autoload stack, you will run into problems of duplicate namespaces between ZF2 and ZF2
+* A: One solution is to do a global search and replace in the ZF2 app and replace all references `Zend\` to `Zend2\`
+* A: Another solution is to add an `API` module to the ZF2 app, and then have the ZF3 app make API calls to ZF2.  See: https://github.com/dbierer/ZF2_Api_ZF3
 
 ## ERRATA
 * file:///D:/Repos/ZF-Level-2/Course_Materials/index.html#/2/8: `->join(['a' => static::TABLE],` s/be `->join(['a' => AttendeeTable::TABLE],`

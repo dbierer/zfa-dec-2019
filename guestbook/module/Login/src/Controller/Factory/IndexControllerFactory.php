@@ -19,8 +19,7 @@ class IndexControllerFactory implements FactoryInterface
             ->setLoginForm($container->get(LoginForm::class))
             ->setAuthAdapter($container->get('login-auth-adapter'))
             ->setAuthService($container->get('login-auth-service'))
-            ->setSessionContainer($container->get('application-session-container'))
-            ->setSessionManager($container->get('application-session-manager'));
+            ->setSessionContainer($container->get('application-session-container'));
         return $controller;
     }
 }

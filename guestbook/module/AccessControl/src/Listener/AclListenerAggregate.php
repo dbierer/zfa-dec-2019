@@ -1,6 +1,7 @@
 <?php
 namespace AccessControl\Listener;
 
+use Application\Model\AbstractModel;
 use Zend\Mvc\MvcEvent;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -40,7 +41,10 @@ class AclListenerAggregate implements ListenerAggregateInterface
         $resource = $match->getParam('controller');
         // get role
         if ($this->authService->hasIdentity()) {
-            $role = $this->authService->getIdentity()->getRole() ?? 'guest';
+            $identity = $this->authService->getIdentity();
+            if (is_object($identity) && $identity instanceof AbstractModel) {
+                $role = $identity->getRole() ?? 'guest';
+            }
         }
         // make sure controller which is matched is in the list of resources
         $denied = TRUE;
